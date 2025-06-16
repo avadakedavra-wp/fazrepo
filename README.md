@@ -7,15 +7,23 @@ A fast CLI tool to check package manager versions on your system.
 - 🚀 Check versions of npm, yarn, pnpm, and bun
 - 🎨 Beautiful colored output
 - ⚡ Fast and lightweight
-- 🔧 Easy installation via Homebrew or curl
+- 🔧 Easy installation via Homebrew, curl, or PowerShell
+- 🌍 Cross-platform support (Linux, macOS, Windows)
 
 ## Installation
 
-### Quick Start (Development Install)
+### Windows (PowerShell)
+
+```powershell
+# Install via PowerShell (recommended for Windows)
+irm https://raw.githubusercontent.com/avadakedavra-wp/fazrepo/main/install.ps1 | iex
+```
+
+### Quick Start (Development Install - All Platforms)
 
 ```bash
 # Install from source (works immediately)
-curl -fsSL https://raw.githubusercontent.com/avadakedavra-wp/fazrepo/master/install-dev.sh | bash
+curl -fsSL https://raw.githubusercontent.com/avadakedavra-wp/fazrepo/main/install-dev.sh | bash
 ```
 
 ### Homebrew (macOS/Linux) - Coming Soon
@@ -50,6 +58,19 @@ fazrepo
 fazrepo check
 ```
 
+### Advanced options
+
+```bash
+# Check specific package managers only
+fazrepo check --only npm,bun
+
+# Show detailed information with full paths
+fazrepo check --detailed
+
+# List all supported package managers
+fazrepo list
+```
+
 ### Initialize fazrepo in current directory
 
 ```bash
@@ -62,6 +83,15 @@ fazrepo init
 fazrepo version
 # or
 fazrepo --version
+```
+
+### Windows-specific usage
+
+```powershell
+# PowerShell examples
+fazrepo check
+fazrepo check --only npm,pnpm
+fazrepo list
 ```
 
 ## Sample Output
@@ -77,10 +107,20 @@ fazrepo --version
 
 ## Package Managers Supported
 
-- **npm** - Node Package Manager
-- **yarn** - Yet Another Resource Negotiator
-- **pnpm** - Performant npm
-- **bun** - Bun JavaScript runtime and package manager
+fazrepo automatically detects package managers across all platforms:
+
+- **npm** - Node Package Manager (detects `npm`, `npm.cmd` on Windows)
+- **yarn** - Yet Another Resource Negotiator (detects `yarn`, `yarn.cmd` on Windows)  
+- **pnpm** - Performant npm (detects `pnpm`, `pnpm.cmd` on Windows)
+- **bun** - Bun JavaScript runtime and package manager (detects `bun`, `bun.exe` on Windows)
+
+### Platform Support
+
+- ✅ **Linux** (x86_64, ARM64)
+- ✅ **macOS** (Intel, Apple Silicon)  
+- ✅ **Windows** (x86_64, ARM64)
+
+For Windows-specific installation and usage instructions, see [WINDOWS.md](WINDOWS.md).
 
 ## Contributing
 

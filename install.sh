@@ -18,11 +18,16 @@ BINARY_NAME="fazrepo"
 INSTALL_DIR="/usr/local/bin"
 
 # Detect OS and architecture
-OS=$(uname -s | tr '[:upper:]' '[:lower:]')
-ARCH=$(uname -m)
+OS=$(uname -s | tr '[:upper:]' '[:lower:]' 2>/dev/null || echo "unknown")
+ARCH=$(uname -m 2>/dev/null || echo "unknown")
+
+# Handle Windows detection (for Git Bash, WSL, etc.)
+if [[ "$OS" == "mingw"* ]] || [[ "$OS" == "msys"* ]] || [[ "$OS" == "cygwin"* ]]; then
+    OS="windows"
+fi
 
 case $ARCH in
-    x86_64)
+    x86_64|amd64)
         ARCH="x86_64"
         ;;
     arm64|aarch64)
@@ -37,9 +42,18 @@ esac
 case $OS in
     linux)
         TARGET="$ARCH-unknown-linux-gnu"
+        BINARY_EXT=""
         ;;
     darwin)
         TARGET="$ARCH-apple-darwin"
+        BINARY_EXT=""
+        ;;
+    windows)
+        TARGET="$ARCH-pc-windows-msvc"
+        BINARY_EXT=".exe"
+        INSTALL_DIR="$HOME/bin"
+        # Create install directory if it doesn't exist
+        mkdir -p "$INSTALL_DIR"
         ;;
     *)
         echo -e "${RED}❌ Unsupported OS: $OS${NC}"
@@ -81,16 +95,16 @@ if [ -z "$LATEST_RELEASE" ]; then
     echo -e "${YELLOW}🔨 Building from source...${NC}"
     cargo build --release
     
-    BINARY_PATH="target/release/$BINARY_NAME"
+    BINARY_PATH="target/release/$BINARY_NAME$BINARY_EXT"
 else
     echo -e "${YELLOW}📦 Latest version: $LATEST_RELEASE${NC}"
     
     # Download URL
-    DOWNLOAD_URL="https://github.com/$REPO/releases/download/$LATEST_RELEASE/${BINARY_NAME}-$TARGET"
+    DOWNLOAD_URL="https://github.com/$REPO/releases/download/$LATEST_RELEASE/${BINARY_NAME}-$TARGET$BINARY_EXT"
     
     # Create temporary directory
     TMP_DIR=$(mktemp -d)
-    BINARY_PATH="$TMP_DIR/$BINARY_NAME"
+    BINARY_PATH="$TMP_DIR/$BINARY_NAME$BINARY_EXT"
     
     echo -e "${YELLOW}⬇️  Downloading $BINARY_NAME for $TARGET...${NC}"
     
@@ -105,8 +119,17 @@ fi
 # Make binary executable
 chmod +x "$BINARY_PATH"
 
-# Check if we need sudo for installation
-if [ ! -w "$INSTALL_DIR" ]; then
+# Check if we need sudo for installation (not needed on Windows)
+if [[ "$OS" == "windows" ]]; then
+    # On Windows, just copy to user's bin directory
+    cp "$BINARY_PATH" "$INSTALL_DIR/"
+    
+    # Add to PATH if not already there
+    if [[ ":$PATH:" != *":$INSTALL_DIR:"* ]]; then
+        echo -e "${YELLOW}💡 Add $INSTALL_DIR to your PATH to use fazrepo from anywhere${NC}"
+        echo -e "${BLUE}Run: export PATH=\"\$PATH:$INSTALL_DIR\"${NC}"
+    fi
+elif [ ! -w "$INSTALL_DIR" ]; then
     echo -e "${YELLOW}🔐 Need sudo to install to $INSTALL_DIR${NC}"
     sudo mv "$BINARY_PATH" "$INSTALL_DIR/"
 else

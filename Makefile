@@ -37,6 +37,10 @@ release:
 	cargo build --release --target x86_64-apple-darwin
 	# macOS aarch64
 	cargo build --release --target aarch64-apple-darwin
+	# Windows x86_64
+	cargo build --release --target x86_64-pc-windows-msvc
+	# Windows aarch64
+	cargo build --release --target aarch64-pc-windows-msvc
 	@echo "Release builds completed!"
 	@echo "Binaries are in target/<target>/release/"
 
@@ -46,3 +50,5 @@ add-targets:
 	rustup target add aarch64-unknown-linux-gnu
 	rustup target add x86_64-apple-darwin
 	rustup target add aarch64-apple-darwin
+	rustup target add x86_64-pc-windows-msvc
+	rustup target add aarch64-pc-windows-msvc
