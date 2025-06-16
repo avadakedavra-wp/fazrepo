@@ -11,14 +11,21 @@ A fast CLI tool to check package manager versions on your system.
 
 ## Installation
 
-### Homebrew (macOS/Linux)
+### Quick Start (Development Install)
+
+```bash
+# Install from source (works immediately)
+curl -fsSL https://raw.githubusercontent.com/avadakedavra-wp/fazrepo/main/install-dev.sh | bash
+```
+
+### Homebrew (macOS/Linux) - Coming Soon
 
 ```bash
 brew tap avadakedavra-wp/fazrepo
 brew install fazrepo
 ```
 
-### Curl (Universal)
+### Curl (Universal) - After First Release
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/avadakedavra-wp/fazrepo/main/install.sh | bash

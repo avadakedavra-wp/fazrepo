@@ -50,29 +50,56 @@ esac
 echo -e "${BLUE}🚀 Installing fazrepo...${NC}"
 
 # Get the latest release
-LATEST_RELEASE=$(curl -s "https://api.github.com/repos/$REPO/releases/latest" | grep '"tag_name"' | sed -E 's/.*"([^"]+)".*/\1/')
+echo -e "${YELLOW}📡 Checking for latest release...${NC}"
+LATEST_RELEASE=$(curl -s "https://api.github.com/repos/$REPO/releases/latest" | grep '"tag_name"' | sed -E 's/.*"([^"]+)".*/\1/' 2>/dev/null || echo "")
 
 if [ -z "$LATEST_RELEASE" ]; then
-    echo -e "${RED}❌ Failed to get latest release information${NC}"
-    exit 1
-fi
-
-echo -e "${YELLOW}📦 Latest version: $LATEST_RELEASE${NC}"
-
-# Download URL
-DOWNLOAD_URL="https://github.com/$REPO/releases/download/$LATEST_RELEASE/${BINARY_NAME}-$TARGET"
-
-# Create temporary directory
-TMP_DIR=$(mktemp -d)
-BINARY_PATH="$TMP_DIR/$BINARY_NAME"
-
-echo -e "${YELLOW}⬇️  Downloading $BINARY_NAME for $TARGET...${NC}"
-
-# Download the binary
-if ! curl -sL "$DOWNLOAD_URL" -o "$BINARY_PATH"; then
-    echo -e "${RED}❌ Failed to download $BINARY_NAME${NC}"
-    echo -e "${YELLOW}💡 You may need to install from source or check if the release exists${NC}"
-    exit 1
+    echo -e "${YELLOW}⚠️  No releases found. Installing from source...${NC}"
+    
+    # Fallback: install from source
+    echo -e "${BLUE}📦 Cloning repository...${NC}"
+    TMP_DIR=$(mktemp -d)
+    cd "$TMP_DIR"
+    
+    if ! git clone "https://github.com/$REPO.git" fazrepo; then
+        echo -e "${RED}❌ Failed to clone repository${NC}"
+        echo -e "${YELLOW}💡 Make sure the repository exists and is public${NC}"
+        echo -e "${YELLOW}💡 Or install Rust and build from source manually${NC}"
+        exit 1
+    fi
+    
+    cd fazrepo
+    
+    # Check if Rust is installed
+    if ! command -v cargo &> /dev/null; then
+        echo -e "${RED}❌ Rust/Cargo not found${NC}"
+        echo -e "${YELLOW}💡 Please install Rust from https://rustup.rs/${NC}"
+        echo -e "${YELLOW}💡 Then run: cargo install --git https://github.com/$REPO${NC}"
+        exit 1
+    fi
+    
+    echo -e "${YELLOW}🔨 Building from source...${NC}"
+    cargo build --release
+    
+    BINARY_PATH="target/release/$BINARY_NAME"
+else
+    echo -e "${YELLOW}📦 Latest version: $LATEST_RELEASE${NC}"
+    
+    # Download URL
+    DOWNLOAD_URL="https://github.com/$REPO/releases/download/$LATEST_RELEASE/${BINARY_NAME}-$TARGET"
+    
+    # Create temporary directory
+    TMP_DIR=$(mktemp -d)
+    BINARY_PATH="$TMP_DIR/$BINARY_NAME"
+    
+    echo -e "${YELLOW}⬇️  Downloading $BINARY_NAME for $TARGET...${NC}"
+    
+    # Download the binary
+    if ! curl -sL "$DOWNLOAD_URL" -o "$BINARY_PATH"; then
+        echo -e "${RED}❌ Failed to download $BINARY_NAME${NC}"
+        echo -e "${YELLOW}💡 You may need to install from source or check if the release exists${NC}"
+        exit 1
+    fi
 fi
 
 # Make binary executable
