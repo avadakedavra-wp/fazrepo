@@ -1,7 +1,7 @@
 class Fazrepo < Formula
   desc "A fast CLI tool to check package manager versions"
   homepage "https://github.com/avadakedavra-wp/fazrepo"
-  url "https://github.com/avadakedavra-wp/fazrepo/archive/v0.1.0.tar.gz"
+  url "https://github.com/avadakedavra-wp/fazrepo/archive/v0.1.1.tar.gz"
   sha256 "REPLACE_WITH_ACTUAL_SHA256"
   license "MIT"
 
