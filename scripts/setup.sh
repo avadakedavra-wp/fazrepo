@@ -47,9 +47,9 @@ if ! git remote get-url origin &> /dev/null; then
     echo ""
 fi
 
-# Check if main branch exists
-if git show-ref --verify --quiet refs/heads/main; then
-    current_branch="main"
+# Check if master branch exists
+if git show-ref --verify --quiet refs/heads/master; then
+    current_branch="master"
 elif git show-ref --verify --quiet refs/heads/master; then
     current_branch="master"
 else
@@ -88,10 +88,10 @@ echo ""
 
 echo -e "${YELLOW}4.${NC} Test installation methods:"
 echo -e "   ${GREEN}# Development install (works now):${NC}"
-echo -e "   curl -fsSL https://raw.githubusercontent.com/avadakedavra-wp/fazrepo/main/install-dev.sh | bash"
+echo -e "   curl -fsSL https://raw.githubusercontent.com/avadakedavra-wp/fazrepo/master/install-dev.sh | bash"
 echo ""
 echo -e "   ${GREEN}# Release install (after step 3):${NC}"
-echo -e "   curl -fsSL https://raw.githubusercontent.com/avadakedavra-wp/fazrepo/main/install.sh | bash"
+echo -e "   curl -fsSL https://raw.githubusercontent.com/avadakedavra-wp/fazrepo/master/install.sh | bash"
 echo ""
 
 echo -e "${YELLOW}5.${NC} Set up Homebrew tap (optional):"

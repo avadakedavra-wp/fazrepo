@@ -14,7 +14,7 @@ This is expected because **no GitHub releases exist yet**. Here's how to fix it:
 Use the development installer that builds from source:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/avadakedavra-wp/fazrepo/main/install-dev.sh | bash
+curl -fsSL https://raw.githubusercontent.com/avadakedavra-wp/fazrepo/master/install-dev.sh | bash
 ```
 
 This script will:
@@ -45,7 +45,7 @@ This script will:
 git remote set-url origin https://github.com/avadakedavra-wp/fazrepo.git
 
 # Push to GitHub
-git push -u origin main
+git push -u origin master
 ```
 
 ### 4. Create Your First Release
@@ -64,10 +64,10 @@ After creating the release, test both install methods:
 
 ```bash
 # Development install (works now)
-curl -fsSL https://raw.githubusercontent.com/avadakedavra-wp/fazrepo/main/install-dev.sh | bash
+curl -fsSL https://raw.githubusercontent.com/avadakedavra-wp/fazrepo/master/install-dev.sh | bash
 
 # Release install (works after step 4)
-curl -fsSL https://raw.githubusercontent.com/avadakedavra-wp/fazrepo/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/avadakedavra-wp/fazrepo/master/install.sh | bash
 ```
 
 ## 🛠️ Troubleshooting

@@ -38,7 +38,7 @@ Thank you for your interest in contributing to fazrepo! This document provides g
 ```
 fazrepo/
 ├── src/
-│   └── main.rs              # Main CLI application
+│   └── master.rs              # Main CLI application
 ├── tests/
 │   └── integration_tests.rs # Integration tests
 ├── .github/
@@ -123,7 +123,7 @@ To add support for a new package manager:
 2. Update `CHANGELOG.md`
 3. Run tests: `cargo test`
 4. Use the release script: `./release.sh <version>`
-5. Push changes and tag: `git push origin main && git push origin v<version>`
+5. Push changes and tag: `git push origin master && git push origin v<version>`
 6. GitHub Actions will automatically build and create releases
 
 ## Code Style

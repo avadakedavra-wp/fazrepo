@@ -33,8 +33,8 @@ enum Commands {
     List,
 }
 
-#[tokio::main]
-async fn main() -> Result<()> {
+#[tokio::master]
+async fn master() -> Result<()> {
     let cli = Cli::parse();
 
     match &cli.command {

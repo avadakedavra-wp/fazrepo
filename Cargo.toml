@@ -12,7 +12,7 @@ categories = ["command-line-utilities"]
 
 [[bin]]
 name = "fazrepo"
-path = "src/main.rs"
+path = "src/master.rs"
 
 [dependencies]
 clap = { version = "4.0", features = ["derive"] }

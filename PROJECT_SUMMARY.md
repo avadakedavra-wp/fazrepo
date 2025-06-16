@@ -77,7 +77,7 @@ brew install fazrepo
 ### 2. Universal Install Script
 ```bash
 # Host install.sh on GitHub and users can install with:
-curl -fsSL https://raw.githubusercontent.com/avadakedavra-wp/fazrepo/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/avadakedavra-wp/fazrepo/master/install.sh | bash
 ```
 
 ### 3. GitHub Releases
@@ -100,15 +100,15 @@ The GitHub Actions workflow will automatically:
    git init
    git add .
    git commit -m "Initial commit: fazrepo CLI tool"
-   git branch -M main
+   git branch -M master
    git remote add origin https://github.com/avadakedavra-wp/fazrepo.git
-   git push -u origin main
+   git push -u origin master
    ```
 
 3. **First Release**:
    ```bash
    ./release.sh 0.1.0
-   git push origin main
+   git push origin master
    git push origin v0.1.0
    ```
 
@@ -121,7 +121,7 @@ The GitHub Actions workflow will automatically:
 
 - **Language**: Rust (2021 edition)
 - **Dependencies**: 7 carefully chosen crates
-- **Features**: 5 main commands with options
+- **Features**: 5 master commands with options
 - **Tests**: 7 tests (unit + integration)
 - **Documentation**: 4 detailed markdown files
 - **Platforms**: Linux, macOS (x86_64, aarch64)

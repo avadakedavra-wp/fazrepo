@@ -67,7 +67,7 @@ git tag "v$VERSION"
 
 echo -e "${GREEN}✅ Release v$VERSION prepared!${NC}"
 echo -e "${BLUE}🚀 To complete the release:${NC}"
-echo -e "   ${YELLOW}git push origin main${NC}"
+echo -e "   ${YELLOW}git push origin master${NC}"
 echo -e "   ${YELLOW}git push origin v$VERSION${NC}"
 echo ""
 echo -e "${BLUE}📦 After pushing the tag, GitHub Actions will:${NC}"

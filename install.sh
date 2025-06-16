@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # fazrepo installation script
-# Usage: curl -fsSL https://raw.githubusercontent.com/avadakedavra-wp/fazrepo/main/install.sh | bash
+# Usage: curl -fsSL https://raw.githubusercontent.com/avadakedavra-wp/fazrepo/master/install.sh | bash
 
 set -e
 

@@ -2,7 +2,7 @@
 
 # fazrepo development installation script
 # For when there are no releases yet
-# Usage: curl -fsSL https://raw.githubusercontent.com/avadakedavra-wp/fazrepo/main/install-dev.sh | bash
+# Usage: curl -fsSL https://raw.githubusercontent.com/avadakedavra-wp/fazrepo/master/install-dev.sh | bash
 
 set -e
 
