@@ -7,6 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0] - 2025-01-14
+
+### Added
+- Complete Windows support with smart package manager detection
+- Cross-platform builds for Linux, macOS, Windows (x86_64, ARM64)
+- Windows-specific installation script (install.ps1)
+- Enhanced command resolution for .cmd and .exe variants on Windows
+- Comprehensive Windows documentation and development guides
+- GitHub Actions CI/CD for automated cross-platform releases
+
+### Fixed
+- Binary path in Cargo.toml (master.rs → main.rs)
+- Tokio main function decorator (#[tokio::master] → #[tokio::main])
+- Windows-specific PATH handling and command execution
+- Error handling to check both stdout and stderr for version information
+
+### Improved
+- Enhanced testing framework with cross-platform compatibility tests
+- Updated installation scripts with Windows environment detection
+- Better error messages and debugging information
+- Comprehensive project documentation and setup guides
+
 ## [0.1.0] - 2025-06-17
 
 ### Added
