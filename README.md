@@ -16,14 +16,14 @@ A fast CLI tool to check package manager versions on your system.
 
 ```powershell
 # Install via PowerShell (recommended for Windows)
-irm https://raw.githubusercontent.com/avadakedavra-wp/fazrepo/main/install.ps1 | iex
+irm https://raw.githubusercontent.com/avadakedavra-wp/fazrepo/master/install.ps1 | iex
 ```
 
 ### Quick Start (Development Install - All Platforms)
 
 ```bash
 # Install from source (works immediately)
-curl -fsSL https://raw.githubusercontent.com/avadakedavra-wp/fazrepo/main/install-dev.sh | bash
+curl -fsSL https://raw.githubusercontent.com/avadakedavra-wp/fazrepo/master/install-dev.sh | bash
 ```
 
 ### Homebrew (macOS/Linux) - Coming Soon
