@@ -1,0 +1,145 @@
+# FazRepo Documentation
+
+FazRepo is a blazing-fast CLI tool built in Rust to check package manager versions across npm, yarn, pnpm, and bun.
+
+## Quick Start
+
+### Installation
+
+#### Using Cargo (Recommended)
+```bash
+cargo install fazrepo
+```
+
+#### Using Homebrew
+```bash
+brew install fazrepo
+```
+
+#### Manual Installation
+Download the latest release from [GitHub Releases](https://github.com/avadakedavra-wp/fazrepo/releases) and add it to your PATH.
+
+### Basic Usage
+
+Check all package managers:
+```bash
+fazrepo check
+```
+
+Check with detailed information:
+```bash
+fazrepo check --detailed
+```
+
+Check only specific package managers:
+```bash
+fazrepo check --only npm,yarn
+```
+
+## Features
+
+- **Lightning Fast**: Built in Rust for maximum performance
+- **Cross Platform**: Works on Windows, macOS, and Linux
+- **Multiple Managers**: Supports npm, yarn, pnpm, and bun
+- **Colored Output**: Beautiful terminal output with status indicators
+- **Detailed Mode**: Get installation paths and additional information
+
+## Supported Package Managers
+
+- **npm**: Node Package Manager
+- **yarn**: Yarn Package Manager  
+- **pnpm**: Performant npm
+- **bun**: Bun Runtime & Package Manager
+
+## Commands
+
+### `fazrepo check`
+
+Check versions of all installed package managers.
+
+**Options:**
+- `-d, --detailed`: Show detailed information including installation paths
+- `-o, --only <managers>`: Only check specific package managers (comma-separated)
+
+**Examples:**
+```bash
+# Check all managers
+fazrepo check
+
+# Check with detailed info
+fazrepo check --detailed
+
+# Check only npm and yarn
+fazrepo check --only npm,yarn
+```
+
+### `fazrepo list`
+
+List all supported package managers with descriptions.
+
+### `fazrepo version`
+
+Show version information.
+
+### `fazrepo init`
+
+Initialize fazrepo in the current directory (creates a `.fazrepo` config file).
+
+## Output Examples
+
+### Standard Output
+```
+🔍 Checking package manager versions...
+
+✅ npm 9.8.1 (/usr/local/bin/npm)
+✅ yarn 1.22.19 (/usr/local/bin/yarn)
+❌ pnpm not installed
+✅ bun 1.0.35 (/usr/local/bin/bun)
+```
+
+### Detailed Output
+```
+🔍 Checking package manager versions...
+
+✅ npm 9.8.1
+   📍 Path: /usr/local/bin/npm
+✅ yarn 1.22.19
+   📍 Path: /usr/local/bin/yarn
+❌ pnpm not installed
+✅ bun 1.0.35
+   📍 Path: /usr/local/bin/bun
+```
+
+## Configuration
+
+FazRepo can be initialized in a project directory to create a configuration file:
+
+```bash
+fazrepo init
+```
+
+This creates a `.fazrepo` file with basic configuration.
+
+## Troubleshooting
+
+### Command Not Found
+If you get a "command not found" error after installation:
+
+1. Make sure the binary is in your PATH
+2. Try restarting your terminal
+3. For Cargo installations, ensure `~/.cargo/bin` is in your PATH
+
+### Version Check Fails
+If version checking fails for a specific package manager:
+
+1. Verify the package manager is properly installed
+2. Try running the package manager's version command manually
+3. Check if the binary is accessible from your PATH
+
+## Contributing
+
+We welcome contributions! Please see our [Contributing Guide](https://github.com/avadakedavra-wp/fazrepo/blob/main/CONTRIBUTING.md) for details.
+
+## License
+
+MIT License - see [LICENSE](https://github.com/avadakedavra-wp/fazrepo/blob/main/LICENSE) for details. 

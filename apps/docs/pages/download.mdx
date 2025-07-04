@@ -1,0 +1,114 @@
+---
+title: Download fazrepo
+description: Download fazrepo for your platform
+---
+
+# Download fazrepo
+
+Get the latest version of fazrepo for your operating system.
+
+## Quick Install
+
+### One-Line Install (Recommended)
+
+<Tabs items={['Linux/macOS', 'Windows PowerShell', 'Windows (Git Bash)']}>
+  <Tab>
+    ```bash
+    curl -fsSL https://raw.githubusercontent.com/avadakedavra-wp/fazrepo/main/install.sh | bash
+    ```
+  </Tab>
+  <Tab>
+    ```powershell
+    powershell -ExecutionPolicy Bypass -c "irm https://raw.githubusercontent.com/avadakedavra-wp/fazrepo/main/install.ps1 | iex"
+    ```
+  </Tab>
+  <Tab>
+    ```bash
+    curl -fsSL https://raw.githubusercontent.com/avadakedavra-wp/fazrepo/main/install.sh | bash
+    ```
+  </Tab>
+</Tabs>
+
+## Package Managers
+
+<Tabs items={['Cargo', 'Homebrew', 'Chocolatey']}>
+  <Tab>
+    ```bash
+    cargo install fazrepo
+    ```
+  </Tab>
+  <Tab>
+    ```bash
+    brew tap avadakedavra-wp/fazrepo
+    brew install fazrepo
+    ```
+  </Tab>
+  <Tab>
+    ```cmd
+    choco install fazrepo
+    ```
+  </Tab>
+</Tabs>
+
+## Direct Downloads
+
+### Latest Release Binaries
+
+| Platform | Architecture | Binary | Zip Package |
+|----------|-------------|--------|-------------|
+| **Linux** | x86_64 | [Download](https://github.com/avadakedavra-wp/fazrepo/releases/latest/download/fazrepo-x86_64-unknown-linux-gnu) | [Download](https://github.com/avadakedavra-wp/fazrepo/releases/latest/download/fazrepo-linux-x64.zip) |
+| **Linux** | ARM64 | [Download](https://github.com/avadakedavra-wp/fazrepo/releases/latest/download/fazrepo-aarch64-unknown-linux-gnu) | [Download](https://github.com/avadakedavra-wp/fazrepo/releases/latest/download/fazrepo-linux-arm64.zip) |
+| **macOS** | Intel | [Download](https://github.com/avadakedavra-wp/fazrepo/releases/latest/download/fazrepo-x86_64-apple-darwin) | [Download](https://github.com/avadakedavra-wp/fazrepo/releases/latest/download/fazrepo-macos-intel.zip) |
+| **macOS** | Apple Silicon | [Download](https://github.com/avadakedavra-wp/fazrepo/releases/latest/download/fazrepo-aarch64-apple-darwin) | [Download](https://github.com/avadakedavra-wp/fazrepo/releases/latest/download/fazrepo-macos-arm64.zip) |
+| **Windows** | x86_64 | [Download](https://github.com/avadakedavra-wp/fazrepo/releases/latest/download/fazrepo-x86_64-pc-windows-msvc.exe) | [Download](https://github.com/avadakedavra-wp/fazrepo/releases/latest/download/fazrepo-windows-x64.zip) |
+
+### Installation Instructions
+
+#### After downloading a binary:
+1. **Linux/macOS**: Make it executable with `chmod +x fazrepo`
+2. **All platforms**: Move to a directory in your PATH (e.g., `/usr/local/bin` on Linux/macOS, or `%USERPROFILE%\.local\bin` on Windows)
+
+#### After downloading a zip:
+1. Extract the archive
+2. Follow the README.txt inside for platform-specific instructions
+
+## Build from Source
+
+If you have Rust installed:
+
+```bash
+git clone https://github.com/avadakedavra-wp/fazrepo.git
+cd fazrepo/apps/cli
+cargo build --release
+```
+
+The binary will be at `target/release/fazrepo` (or `fazrepo.exe` on Windows).
+
+## Verify Installation
+
+After installation:
+
+```bash
+fazrepo --version
+fazrepo check
+```
+
+## Troubleshooting
+
+### Command not found?
+
+1. **Restart your terminal** - PATH changes require a new session
+2. **Check PATH**: Ensure the installation directory is in your PATH
+3. **Manual PATH setup**:
+   - **Linux/macOS**: Add `export PATH="$PATH:$HOME/.local/bin"` to `~/.bashrc` or `~/.zshrc`
+   - **Windows**: Add `%USERPROFILE%\.local\bin` to your user PATH environment variable
+
+### Still having issues?
+
+- Check our [Installation Guide](https://github.com/avadakedavra-wp/fazrepo/blob/main/INSTALL.md)
+- Visit our [GitHub Issues](https://github.com/avadakedavra-wp/fazrepo/issues)
+- Join our [Discord community](https://discord.gg/fazrepo)
+
+---
+
+**Latest Version**: Check [GitHub Releases](https://github.com/avadakedavra-wp/fazrepo/releases) for the most recent version.

@@ -1,0 +1,32 @@
+{
+  "name": "fazrepo-monorepo",
+  "version": "0.2.0",
+  "private": true,
+  "description": "A CLI tool to check package manager versions with web documentation",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "packageManager": "pnpm@9.13.2",
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "test": "turbo run test",
+    "clean": "turbo run clean",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "docs:dev": "turbo run dev --filter=docs",
+    "web:dev": "turbo run dev --filter=web",
+    "cli:build": "turbo run build --filter=cli",
+    "install": "pnpm install",
+    "install:frozen": "pnpm install --frozen-lockfile"
+  },
+  "devDependencies": {
+    "@turbo/gen": "^1.12.4",
+    "prettier": "^3.1.1",
+    "turbo": "^1.12.4"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+} 

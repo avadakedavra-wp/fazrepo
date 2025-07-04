@@ -1,0 +1,28 @@
+[package]
+name = "fazrepo"
+version = "0.2.0"
+edition = "2021"
+description = "A CLI tool for full-stack project generation and package manager checking"
+license = "MIT"
+authors = ["Your Name <your.email@example.com>"]
+homepage = "https://github.com/avadakedavra-wp/fazrepo"
+repository = "https://github.com/avadakedavra-wp/fazrepo"
+keywords = ["cli", "project-generator", "package-manager", "fullstack", "nextjs", "express"]
+categories = ["command-line-utilities", "development-tools"]
+
+[[bin]]
+name = "fazrepo"
+path = "src/main.rs"
+
+[dependencies]
+clap = { version = "4.0", features = ["derive"] }
+tokio = { version = "1.0", features = ["full"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+anyhow = "1.0"
+colored = "2.0"
+which = "4.4"
+async-trait = "0.1"
+
+[dev-dependencies]
+tokio-test = "0.4"

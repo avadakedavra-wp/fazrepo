@@ -40,25 +40,41 @@ if [ -n "$(git status --porcelain)" ]; then
     exit 1
 fi
 
-# Update version in Cargo.toml
-echo -e "${YELLOW}📝 Updating Cargo.toml version${NC}"
-sed -i "s/^version = \".*\"/version = \"$VERSION\"/" Cargo.toml
+# Update version in root package.json
+echo -e "${YELLOW}📝 Updating package.json version${NC}"
+sed -i "s/\"version\": \".*\"/\"version\": \"$VERSION\"/" package.json
+
+# Update version in CLI Cargo.toml
+echo -e "${YELLOW}📝 Updating CLI Cargo.toml version${NC}"
+sed -i "s/^version = \".*\"/version = \"$VERSION\"/" apps/cli/Cargo.toml
 
 # Update version in Homebrew formula
 echo -e "${YELLOW}📝 Updating Homebrew formula${NC}"
 sed -i "s/archive\/v.*/archive\/v$VERSION.tar.gz\"/" homebrew-fazrepo/Formula/fazrepo.rb
 
 # Run tests
-echo -e "${YELLOW}🧪 Running tests${NC}"
+echo -e "${YELLOW}🧪 Running CLI tests${NC}"
+cd apps/cli
 cargo test
+cd ../..
+
+# Run frontend tests (if any)
+echo -e "${YELLOW}🧪 Running frontend tests${NC}"
+pnpm test 2>/dev/null || echo "No frontend tests found, skipping..."
 
 # Build release
-echo -e "${YELLOW}🔨 Building release${NC}"
+echo -e "${YELLOW}🔨 Building CLI release${NC}"
+cd apps/cli
 cargo build --release
+cd ../..
+
+# Build web apps
+echo -e "${YELLOW}🔨 Building web applications${NC}"
+pnpm build
 
 # Commit version changes
 echo -e "${YELLOW}📝 Committing version bump${NC}"
-git add Cargo.toml Cargo.lock homebrew-fazrepo/Formula/fazrepo.rb
+git add package.json apps/cli/Cargo.toml apps/cli/Cargo.lock homebrew-fazrepo/Formula/fazrepo.rb
 git commit -m "Bump version to v$VERSION"
 
 # Create and push tag

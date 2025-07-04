@@ -38,6 +38,20 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     
+    - name: Setup pnpm
+      uses: pnpm/action-setup@v3
+      with:
+        version: 9.13.2
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'pnpm'
+    
+    - name: Install dependencies
+      run: pnpm install --frozen-lockfile
+    
     - name: Install Rust
       uses: dtolnay/rust-toolchain@stable
       with:
@@ -50,7 +64,10 @@ jobs:
         sudo apt-get install -y gcc-aarch64-linux-gnu
     
     - name: Build
-      run: cargo build --release --target ${{ matrix.target }}
+      run: |
+        cd apps/cli
+        cargo build --release --target ${{ matrix.target }}
+        cd ../..
     
     - name: Prepare binary
       run: |
@@ -58,7 +75,7 @@ jobs:
         if [ "${{ matrix.target }}" = "aarch64-unknown-linux-gnu" ]; then
           export CC=aarch64-linux-gnu-gcc
         fi
-        cp target/${{ matrix.target }}/release/${binary_name}${{ matrix.binary_extension }} ${binary_name}-${{ matrix.target }}${{ matrix.binary_extension }}
+        cp apps/cli/target/${{ matrix.target }}/release/${binary_name}${{ matrix.binary_extension }} ${binary_name}-${{ matrix.target }}${{ matrix.binary_extension }}
     
     - name: Upload Release Asset
       uses: softprops/action-gh-release@v1

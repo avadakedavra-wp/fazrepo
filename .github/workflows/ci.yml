@@ -16,8 +16,22 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     
+    - name: Setup pnpm
+      uses: pnpm/action-setup@v3
+      with:
+        version: 9.13.2
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'pnpm'
+    
     - name: Install Rust
       uses: dtolnay/rust-toolchain@stable
+    
+    - name: Install dependencies
+      run: pnpm install --frozen-lockfile
     
     - name: Check formatting
       run: cargo fmt -- --check
@@ -25,8 +39,14 @@ jobs:
     - name: Clippy
       run: cargo clippy -- -D warnings
     
-    - name: Build
+    - name: Build CLI
       run: cargo build --verbose
+    
+    - name: Build Web Apps
+      run: pnpm build
+    
+    - name: Lint
+      run: pnpm lint
     
     - name: Run tests
       run: cargo test --verbose
