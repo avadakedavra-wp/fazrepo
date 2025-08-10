@@ -138,7 +138,7 @@ impl DefaultProjectService {
 
 impl ProjectService for DefaultProjectService {
     fn create_project(&self, config: &ProjectConfig) -> Result<ProjectGenerationResult> {
-        let mut result = ProjectGenerationResult::failure(vec![]);
+        let mut result = ProjectGenerationResult::success(config.name.clone(), Vec::new());
 
         // Validate project name
         if let Err(e) = self.validate_project_name(&config.name) {
@@ -167,8 +167,6 @@ impl ProjectService for DefaultProjectService {
             return Ok(result);
         }
 
-        let mut files_created = Vec::new();
-
         // Create directories
         for dir in &template.structure.directories {
             let dir_path = project_path.join(dir);
@@ -176,7 +174,7 @@ impl ProjectService for DefaultProjectService {
                 result.add_error(format!("Failed to create directory '{}': {}", dir, e));
                 continue;
             }
-            files_created.push(format!("📁 {}", dir));
+            result.files_created.push(format!("📁 {}", dir));
         }
 
         // Create files
@@ -202,7 +200,7 @@ impl ProjectService for DefaultProjectService {
                 continue;
             }
 
-            files_created.push(format!("📄 {}", file.path));
+            result.files_created.push(format!("📄 {}", file.path));
         }
 
         // Create config files
@@ -215,13 +213,11 @@ impl ProjectService for DefaultProjectService {
                 continue;
             }
 
-            files_created.push(format!("⚙️ {}", config_file.name));
+            result.files_created.push(format!("⚙️ {}", config_file.name));
         }
+        result.project_path = Some(config.name.clone());
 
-        Ok(ProjectGenerationResult::success(
-            config.name.clone(),
-            files_created,
-        ))
+        Ok(result)
     }
 
     fn list_templates(&self) -> Vec<ProjectTemplate> {

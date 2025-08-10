@@ -104,6 +104,7 @@ impl ProjectGenerationResult {
     }
 
     pub fn add_error(&mut self, error: String) {
+        self.success = false;
         self.errors.push(error);
     }
-} 
+}
