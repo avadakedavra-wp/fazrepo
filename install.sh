@@ -3,7 +3,7 @@
 # fazrepo installation script
 # Usage: curl -fsSL https://raw.githubusercontent.com/avadakedavra-wp/fazrepo/main/install.sh | bash
 
-set -e
+set -euo pipefail
 
 # Colors for output
 RED='\033[0;31m'
@@ -72,7 +72,7 @@ esac
 
 echo -e "${BLUE}🚀 Installing fazrepo...${NC}"
 echo -e "${YELLOW}📍 Target: $TARGET${NC}"
-echo -e "${YELLOW}� Install directory: $INSTALL_DIR${NC}"
+echo -e "${YELLOW}📂 Install directory: $INSTALL_DIR${NC}"
 
 # Create install directory
 mkdir -p "$INSTALL_DIR"
@@ -155,7 +155,7 @@ install_from_release() {
 
 # Function to install from source
 install_from_source() {
-    echo -e "${YELLOW}� Installing from source...${NC}"
+    echo -e "${YELLOW}🔨 Installing from source...${NC}"
     
     # Check if git is available
     if ! command -v git >/dev/null 2>&1; then
@@ -245,14 +245,14 @@ if [ -f "$INSTALL_DIR/$BINARY_NAME$BINARY_EXT" ]; then
         echo -e "${BLUE}🎯 Version: $version_output${NC}"
     else
         echo -e "${YELLOW}⚠️  fazrepo not immediately available in PATH${NC}"
-        echo -e "${YELLOW}� You can run it directly: $INSTALL_DIR/$BINARY_NAME$BINARY_EXT${NC}"
+        echo -e "${YELLOW}👉 You can run it directly: $INSTALL_DIR/$BINARY_NAME$BINARY_EXT${NC}"
         version_output=$("$INSTALL_DIR/$BINARY_NAME$BINARY_EXT" --version 2>/dev/null || echo "version check failed")
         echo -e "${BLUE}🎯 Version: $version_output${NC}"
     fi
     
     echo ""
     echo -e "${GREEN}🎉 Installation complete!${NC}"
-    echo -e "${BLUE}� Usage examples:${NC}"
+    echo -e "${BLUE}📘 Usage examples:${NC}"
     echo -e "  $BINARY_NAME --help"
     echo -e "  $BINARY_NAME check"
     echo -e "  $BINARY_NAME version"
