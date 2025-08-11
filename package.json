@@ -18,7 +18,6 @@
     "docs:dev": "turbo run dev --filter=docs",
     "web:dev": "turbo run dev --filter=web",
     "cli:build": "turbo run build --filter=cli",
-    "install": "pnpm install",
     "install:frozen": "pnpm install --frozen-lockfile"
   },
   "devDependencies": {
